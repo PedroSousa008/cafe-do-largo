@@ -282,37 +282,22 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding: 1.65rem 1.5rem 1.5rem;
+    justify-content: center;
+    padding: 1.5rem;
     text-align: center;
     pointer-events: none;
 }
 
-.hero-mark h1,
-.hero-mark p {
+.hero-mark h1 {
     margin: 0;
     font-family: var(--mark);
     font-weight: 800;
     text-transform: uppercase;
-}
-
-.hero-mark h1 {
     color: #ffffff;
     font-size: clamp(2.7rem, 7.2vw, 6.4rem);
     line-height: 0.92;
     letter-spacing: 0.06em;
     -webkit-text-stroke: 0.045em #111111;
-    paint-order: stroke fill;
-}
-
-.hero-mark p {
-    margin-top: 0.7rem;
-    color: var(--green);
-    font-size: clamp(0.95rem, 1.7vw, 1.35rem);
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: 0.34em;
-    -webkit-text-stroke: 0.11em #111111;
     paint-order: stroke fill;
 }
 
@@ -862,10 +847,6 @@ section {
     .hero-mark h1 {
         font-size: clamp(2.15rem, 11vw, 3.3rem);
         letter-spacing: 0.04em;
-    }
-
-    .hero-mark p {
-        letter-spacing: 0.22em;
     }
 
     .about {

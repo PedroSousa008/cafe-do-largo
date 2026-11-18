@@ -793,6 +793,8 @@ section {
     background-repeat: repeat;
     color: #2f1a15;
     padding: 4.05rem var(--pad) 3.6rem;
+    border-top: 1px solid #6a645e;
+    border-bottom: 1px solid #6a645e;
     overflow-x: clip;
 }
 

@@ -61,7 +61,14 @@ window.CAFE = {
     menu: [
         { category: "Snacks", items: [] },
         { category: "Entradas", items: [] },
-        { category: "Pratos Principais", items: [] },
+        { category: "Pratos Principais", items: [
+            {
+                name: "Francesinha",
+                price: "€",
+                description: "Pão, Salsicha, Linguiça, Carne de Novilho, Ovo Estrelado, Fiambre, Queijo, Molho Francesinha",
+                image: "images/ementa/francesinha.jpg"
+            }
+        ] },
         { category: "Sobremesa", items: [] },
         { category: "Bebidas", items: [] }
     ]

@@ -164,6 +164,7 @@ section {
 .wordmark {
     display: inline-flex;
     align-items: center;
+    background: #111111;
     line-height: 0;
     text-decoration: none;
 }
@@ -171,7 +172,7 @@ section {
 .wordmark img {
     display: block;
     width: auto;
-    height: 5.35rem;
+    height: 4.85rem;
 }
 
 .site-nav {
@@ -192,6 +193,23 @@ section {
 .site-nav a {
     font-size: 0.875rem;
     letter-spacing: 0.04em;
+}
+
+.nav-pin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+}
+
+.site-nav .nav-pin {
+    text-decoration: none;
+}
+
+.nav-pin svg {
+    width: 1.35rem;
+    height: 1.35rem;
 }
 
 .nav-toggle {
@@ -268,7 +286,6 @@ section {
     justify-content: center;
     padding: 1.5rem;
     text-align: center;
-    color: #6a6a6a;
     pointer-events: none;
 }
 
@@ -278,10 +295,10 @@ section {
     font-family: var(--mark);
     font-weight: 800;
     text-transform: uppercase;
-    text-shadow: 0 1px 16px rgba(255, 255, 255, 0.55);
 }
 
 .hero-mark h1 {
+    color: var(--brown);
     font-size: clamp(2.7rem, 7.2vw, 6.4rem);
     line-height: 0.92;
     letter-spacing: 0.06em;
@@ -289,10 +306,12 @@ section {
 
 .hero-mark p {
     margin-top: 0.7rem;
+    color: var(--green);
     font-size: clamp(0.95rem, 1.7vw, 1.35rem);
     font-weight: 700;
     line-height: 1;
     letter-spacing: 0.34em;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.22);
 }
 
 /* ========================================
@@ -441,10 +460,12 @@ section {
 .address-link {
     display: inline-block;
     margin-top: 1.2rem;
+    max-width: 100%;
     font-family: var(--serif);
-    font-size: clamp(1.4rem, 2vw, 1.75rem);
+    font-size: clamp(1.15rem, 1.7vw, 1.65rem);
     font-weight: 500;
     line-height: 1.35;
+    white-space: nowrap;
     text-decoration-line: underline;
     text-decoration-color: transparent;
     text-decoration-thickness: 1px;
@@ -638,7 +659,7 @@ section {
     }
 
     .wordmark img {
-        height: 4.15rem;
+        height: 3.7rem;
     }
 
     .site-nav {
@@ -673,6 +694,10 @@ section {
         padding: 0.7rem 0;
     }
 
+    .site-nav .nav-pin {
+        padding: 0.35rem 0;
+    }
+
     body.nav-open {
         overflow: hidden;
     }
@@ -703,6 +728,12 @@ section {
 
     .hero-mark p {
         letter-spacing: 0.22em;
+    }
+
+    .contact-links {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.35rem;
     }
 
     .about {
@@ -766,6 +797,6 @@ section {
     }
 
     .wordmark img {
-        height: 3.5rem;
+        height: 3.15rem;
     }
 }

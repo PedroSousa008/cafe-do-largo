@@ -63,11 +63,9 @@
 
     function renderVisit(data) {
         var address = data.address || {};
-        var lines = [];
-        if (address.street) lines.push(address.street);
-        var locality = [address.postalCode, address.city].filter(Boolean).join(" ");
-        if (locality) lines.push(locality);
-        if ((address.street || address.city) && address.country) lines.push(address.country);
+        var line1 = [address.street, address.postalCode].filter(Boolean).join(", ");
+        var line2 = [address.city, address.country].filter(Boolean).join(", ");
+        var lines = [line1, line2].filter(Boolean);
 
         var hours = (data.hours || []).filter(function (row) {
             return row && (row.days || row.time);
@@ -105,6 +103,10 @@
         if (facebookLink && isUrl(data.facebook)) {
             facebookLink.href = data.facebook;
         }
+
+        var pin = document.getElementById("pin-link");
+        var directions = directionsLink(data);
+        if (pin && directions) pin.href = directions;
     }
 
     function renderFooter(data) {
@@ -136,6 +138,14 @@
             facebook.setAttribute("data-facebook", "");
             nav.appendChild(facebook);
         }
+    }
+
+    function directionsLink(data) {
+        if (isUrl(data.mapsUrl)) return data.mapsUrl;
+        var address = data.address || {};
+        var destination = [address.street, address.postalCode, address.city, address.country].filter(Boolean).join(", ");
+        if (!destination) return "";
+        return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(destination);
     }
 
     function mapsLink(data, lines) {

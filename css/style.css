@@ -3,39 +3,704 @@
    ======================================== */
 
 :root {
-    --color-black: #000000;
-    --color-white: #ffffff;
-    --font-serif: "Arapey", "Times New Roman", serif;
+    --ivory: #f5f2eb;
+    --paper: #faf9f6;
+    --brown: #49382f;
+    --olive: #555c48;
+    --line: rgba(73, 56, 47, 0.16);
+    --serif: "Cormorant Garamond", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: "DM Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --pad: clamp(1.25rem, 3.2vw, 4rem);
+    --header: 4.25rem;
 }
 
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+html {
+    scroll-padding-top: var(--header);
+}
+
+body {
     margin: 0;
-    padding: 0;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
     min-height: 100vh;
-    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: var(--ivory);
+    color: var(--brown);
+    font-family: var(--sans);
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button,
+a {
+    color: inherit;
+}
+
+button {
+    font: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+:focus-visible {
+    outline: 1px solid var(--brown);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: var(--olive);
+    color: var(--ivory);
+}
+
+.skip {
+    position: absolute;
+    left: var(--pad);
+    top: 0.75rem;
+    z-index: 40;
+    padding: 0.4rem 0.7rem;
+    background: var(--ivory);
+    transform: translateY(-150%);
+}
+
+.skip:focus {
+    transform: none;
+}
+
+.frame {
+    width: min(100%, 90rem);
+    margin-inline: auto;
+    padding-inline: var(--pad);
+}
+
+h1,
+h2,
+h3,
+.wordmark,
+.footer-name,
+.menu-name,
+.quiet {
+    font-family: var(--serif);
+    font-weight: 500;
+}
+
+h1,
+h2 {
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+}
+
+section {
+    scroll-margin-top: calc(var(--header) + 0.5rem);
+}
+
+/* ========================================
+   Cabeçalho
+   ======================================== */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--ivory);
+    border-bottom: 1px solid var(--line);
+}
+
+.header-bar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background: var(--color-black);
-    color: var(--color-white);
-    font-family: var(--font-serif);
+    justify-content: space-between;
+    min-height: var(--header);
+    gap: 1.5rem;
+}
+
+.wordmark {
+    font-size: clamp(1.35rem, 2vw, 1.6rem);
+    line-height: 1;
+    letter-spacing: 0.01em;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+}
+
+.site-nav a,
+.footer-nav a,
+.text-link {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.35em;
+    text-decoration-color: transparent;
+}
+
+.site-nav a {
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+}
+
+.nav-toggle {
+    display: none;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .site-nav a,
+    .footer-nav a,
+    .text-link,
+    .wordmark {
+        transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+}
+
+.site-nav a:hover,
+.footer-nav a:hover,
+.text-link:hover,
+.wordmark:hover {
+    color: var(--olive);
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible,
+.footer-nav a:hover,
+.footer-nav a:focus-visible,
+.text-link:hover,
+.text-link:focus-visible {
+    text-decoration-color: currentColor;
+}
+
+/* ========================================
+   Abertura
+   ======================================== */
+
+.hero {
+    padding-top: 1.25rem;
+}
+
+.hero-figure {
+    margin: 0;
+}
+
+.hero-figure img {
+    display: block;
+    width: 100%;
+    height: min(62vh, 42rem);
+    object-fit: cover;
+    object-position: 42% 55%;
+}
+
+.hero-text {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(11rem, 0.55fr);
+    gap: 1.5rem 2.5rem;
+    align-items: end;
+    padding: 1.35rem 0 0;
 }
 
 h1 {
-    font-size: clamp(2.75rem, 7vw, 5.5rem);
-    font-weight: 400;
+    margin: 0;
+    font-size: clamp(3.35rem, 7.4vw, 6.15rem);
+}
+
+.hero-text p {
+    margin: 0 0 0.7rem;
+    justify-self: end;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.45rem, 2vw, 1.8rem);
+    line-height: 1.15;
+    text-align: right;
+}
+
+/* ========================================
+   O café
+   ======================================== */
+
+.about {
+    padding: 5.5rem 0 5rem;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.05fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+}
+
+.about-figure {
+    margin: 0;
+}
+
+.about-figure img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    object-position: center 42%;
+}
+
+.about-copy {
+    max-width: 34rem;
+    padding-top: clamp(1.5rem, 8vw, 6.5rem);
+}
+
+.about-copy h2,
+.menu h2,
+.gallery h2,
+.visit h2 {
+    margin: 0;
+    font-size: clamp(2.5rem, 4.4vw, 3.6rem);
+}
+
+.about-copy p {
+    max-width: 34ch;
+    margin: 1.35rem 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+}
+
+/* ========================================
+   Ementa
+   ======================================== */
+
+.menu {
+    background: var(--paper);
+    padding: 4.75rem 0 5rem;
+}
+
+.quiet {
+    max-width: 16rem;
+    margin: 1.6rem 0 0;
+    font-size: clamp(1.55rem, 2.4vw, 1.9rem);
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.menu-groups,
+#ementa-conteudo:has(.menu-group) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(2rem, 5vw, 4.5rem);
+    margin-top: 2.25rem;
+}
+
+.menu-group h3 {
+    margin: 0 0 0.35rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--olive);
+}
+
+.menu-group ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem 1.5rem;
+    align-items: baseline;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.menu-name {
+    margin: 0;
+    font-size: clamp(1.35rem, 2vw, 1.6rem);
+    line-height: 1.15;
+}
+
+.menu-note {
+    margin: 0.2rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.45;
+}
+
+.menu-price {
+    font-size: 0.875rem;
+    font-variant-numeric: tabular-nums;
     letter-spacing: 0.02em;
-    line-height: 1.1;
-    text-align: center;
+}
+
+/* ========================================
+   Ambiente
+   ======================================== */
+
+.gallery {
+    padding: 5rem 0 4.5rem;
+}
+
+.gallery h2 {
+    margin-bottom: 1.5rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1.45fr 0.9fr;
+    gap: 0.85rem;
+}
+
+.shot {
+    margin: 0;
+    overflow: hidden;
+}
+
+.shot img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.shot-wide {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.shot-wide img {
+    aspect-ratio: 3 / 2;
+    object-position: center 60%;
+}
+
+.shot-tall {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    position: relative;
+}
+
+.shot-tall img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    object-position: 48% 72%;
+}
+
+.shot-low {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.shot-low img {
+    aspect-ratio: 3 / 2;
+    object-position: center;
+}
+
+/* ========================================
+   Visitar
+   ======================================== */
+
+.visit {
+    padding: 1.5rem 0 5.5rem;
+}
+
+.visit-list {
+    max-width: 40rem;
+    margin: 1.75rem 0 0;
+}
+
+.visit-list > div {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr);
+    gap: 1rem 1.5rem;
+    padding: 0.95rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.visit-list dt {
+    padding-top: 0.28rem;
+    font-size: 0.9375rem;
+}
+
+.visit-list dd {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.visit-list .text-link {
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+}
+
+/* ========================================
+   Rodapé
+   ======================================== */
+
+.site-footer {
+    margin-top: auto;
+    background: var(--brown);
+    color: var(--ivory);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+    gap: 2rem 3rem;
+    align-items: end;
+    padding-block: 3.25rem 2.25rem;
+}
+
+.footer-name {
+    margin: 0;
+    font-size: clamp(2.6rem, 5vw, 4.25rem);
+    line-height: 0.92;
+}
+
+.footer-address {
+    margin: 0.85rem 0 0;
+    max-width: 22rem;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+}
+
+.footer-meta {
+    justify-self: end;
+    text-align: right;
+}
+
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.35rem 1.25rem;
+}
+
+.footer-nav a {
+    font-size: 0.875rem;
+    letter-spacing: 0.03em;
+}
+
+.legal {
+    margin: 1.1rem 0 0;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+}
+
+.site-footer :focus-visible {
+    outline-color: var(--ivory);
+}
+
+/* ========================================
+   Movimento
+   ======================================== */
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .shot img {
+        transition: opacity 0.35s ease;
+    }
+
+    .shot:hover img {
+        opacity: 0.9;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    .hero-figure,
+    .hero-text {
+        animation: rise 0.7s ease both;
+    }
+
+    .hero-text {
+        animation-delay: 0.08s;
+    }
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ========================================
+   Ecrãs estreitos
+   ======================================== */
+
+@media (max-width: 56rem) {
+    .about-grid {
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+        gap: 2rem;
+    }
+
+    .about-copy {
+        padding-top: 1.5rem;
+    }
+}
+
+@media (max-width: 46rem) {
+    .nav-toggle {
+        display: inline-flex;
+    }
+
+    .site-nav {
+        display: none;
+        position: fixed;
+        inset: var(--header) 0 0 0;
+        z-index: 19;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.15rem;
+        padding: 1.25rem var(--pad) 2.5rem;
+        background: var(--ivory);
+        overflow-y: auto;
+    }
+
+    .site-nav.is-open {
+        display: flex;
+    }
+
+    .site-nav a {
+        font-family: var(--serif);
+        font-size: 2rem;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        padding: 0.7rem 0;
+    }
+
+    body.nav-open {
+        overflow: hidden;
+    }
+
+    .hero-text,
+    .about-grid,
+    .menu-groups,
+    #ementa-conteudo:has(.menu-group),
+    .gallery-grid,
+    .footer-grid,
+    .visit-list > div {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-figure img {
+        height: min(58vh, 28rem);
+    }
+
+    .hero-text {
+        padding-top: 1.15rem;
+    }
+
+    .hero-text p {
+        justify-self: start;
+        margin: 0;
+        text-align: left;
+    }
+
+    h1 {
+        font-size: clamp(3rem, 14vw, 4.25rem);
+    }
+
+    .about {
+        padding: 3.25rem 0 3rem;
+    }
+
+    .about-copy {
+        padding-top: 0;
+    }
+
+    .about-copy p {
+        max-width: 38ch;
+    }
+
+    .menu,
+    .gallery {
+        padding: 3.25rem 0;
+    }
+
+    .shot-wide,
+    .shot-low,
+    .shot-tall {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .shot-tall {
+        position: static;
+    }
+
+    .shot-wide img,
+    .shot-low img {
+        aspect-ratio: 3 / 2;
+    }
+
+    .shot-tall img {
+        position: static;
+        aspect-ratio: 3 / 4;
+        height: auto;
+    }
+
+    .visit {
+        padding-bottom: 3.5rem;
+    }
+
+    .visit-list > div {
+        gap: 0.3rem;
+    }
+
+    .footer-meta {
+        justify-self: start;
+        text-align: left;
+    }
+
+    .footer-nav {
+        justify-content: flex-start;
+    }
+
+    .footer-nav a {
+        padding: 0.35rem 0;
+    }
+}
+
+@media (max-width: 22.5rem) {
+    h1 {
+        font-size: 2.7rem;
+    }
+
+    .wordmark {
+        font-size: 1.2rem;
+    }
 }

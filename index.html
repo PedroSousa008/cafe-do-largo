@@ -3,15 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Em Breve</title>
+    <title>Café do Largo</title>
+    <meta name="description" content="Café do Largo. Um lugar para ficar.">
+    <meta property="og:title" content="Café do Largo">
+    <meta property="og:description" content="Um lugar para ficar.">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cafe-do-largo-seven.vercel.app/">
+    <link rel="canonical" href="https://cafe-do-largo-seven.vercel.app/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arapey&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="images/sala.jpg">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <main>
-        <h1>Em Breve!</h1>
+    <a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+
+    <header class="site-header">
+        <div class="frame header-bar">
+            <a class="wordmark" href="#inicio" data-field="name">Café do Largo</a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navegacao">Menu</button>
+            <nav id="navegacao" class="site-nav" aria-label="Navegação principal">
+                <a href="#inicio">Início</a>
+                <a href="#cafe">O Café</a>
+                <a href="#ementa">Ementa</a>
+                <a href="#visitar">Visitar</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="conteudo">
+        <section id="inicio" class="hero">
+            <div class="frame">
+                <!-- Fotografia provisória. Ver créditos em js/cafe.js. -->
+                <figure class="hero-figure">
+                    <img src="images/sala.jpg" width="1800" height="1200" alt="Balcão de um café, com madeira, uma máquina e a porta aberta para a luz da rua." fetchpriority="high">
+                </figure>
+                <div class="hero-text">
+                    <h1 data-field="name">Café do Largo</h1>
+                    <p data-field="tagline">Um lugar para ficar.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cafe" class="about">
+            <div class="frame about-grid">
+                <figure class="about-figure">
+                    <img src="images/pastelaria.jpg" width="1600" height="2400" alt="Pastéis de nata numa vitrina, no momento em que são servidos." loading="lazy" decoding="async">
+                </figure>
+                <div class="about-copy">
+                    <h2>O café</h2>
+                    <p data-field="about">Há sítios onde a pausa se torna um hábito. Um café acabado de tirar, uma mesa junto à luz e uma conversa que não tem hora para acabar.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ementa" class="menu">
+            <div class="frame">
+                <h2>Ementa</h2>
+                <div id="ementa-conteudo">
+                    <p class="quiet">A ementa será publicada aqui.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ambiente" class="gallery" aria-labelledby="ambiente-titulo">
+            <div class="frame">
+                <h2 id="ambiente-titulo">Ambiente</h2>
+                <div class="gallery-grid">
+                    <figure class="shot shot-wide">
+                        <img src="images/chavena.jpg" width="1600" height="1067" alt="Chávena de café sobre uma mesa de madeira, com luz de fim de tarde." loading="lazy" decoding="async">
+                    </figure>
+                    <figure class="shot shot-tall">
+                        <img src="images/janela.jpg" width="1800" height="2700" alt="Mesa de madeira junto a uma janela, com a luz a entrar pelas persianas." loading="lazy" decoding="async">
+                    </figure>
+                    <figure class="shot shot-low">
+                        <img src="images/nata.jpg" width="1600" height="1067" alt="Pastéis de nata vistos de perto, sobre mármore." loading="lazy" decoding="async">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section id="visitar" class="visit">
+            <div class="frame">
+                <h2>Visitar</h2>
+                <div id="visita-conteudo">
+                    <p class="quiet">A morada, o horário e o contacto serão publicados aqui.</p>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="site-footer">
+        <div class="frame footer-grid">
+            <div>
+                <p class="footer-name" data-field="name">Café do Largo</p>
+                <p id="rodape-morada" class="footer-address" hidden></p>
+            </div>
+            <div class="footer-meta">
+                <nav class="footer-nav" aria-label="Rodapé">
+                    <a href="#inicio">Início</a>
+                    <a href="#cafe">O Café</a>
+                    <a href="#ementa">Ementa</a>
+                    <a href="#visitar">Visitar</a>
+                </nav>
+                <p class="legal">© <span id="ano">2026</span> <span data-field="name">Café do Largo</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/cafe.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

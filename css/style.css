@@ -131,7 +131,7 @@ section {
     top: 0;
     z-index: 20;
     background: transparent;
-    border-bottom: 2px solid var(--green);
+    border-bottom: 2px solid var(--brown);
     box-shadow: 0 0 0 transparent;
     transition: box-shadow 0.4s var(--spring);
 }
@@ -650,7 +650,7 @@ section {
     margin-top: auto;
     background: var(--brown);
     color: var(--ivory);
-    border-top: 3px solid var(--green);
+    border-top: 3px solid var(--brown);
 }
 
 .footer-grid {

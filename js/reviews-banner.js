@@ -1,4 +1,5 @@
 (function () {
+    var HOLD = 3000;
     var section = document.getElementById("avaliacoes");
     var stage = document.getElementById("avaliacoes-conteudo");
     var nav = document.getElementById("avaliacoes-nav");
@@ -10,71 +11,101 @@
     var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var index = 0;
     var timer = 0;
-    var hovering = false;
     var focused = false;
-    var slides = [];
+    var track = document.createElement("div");
+    track.className = "reviews-track";
+    track.innerHTML = reviews.map(slideMarkup).join("");
+    if (reviews.length > 1) track.insertAdjacentHTML("beforeend", slideMarkup(reviews[0]));
+    stage.appendChild(track);
 
-    stage.innerHTML = reviews.map(slideMarkup).join("");
-    slides = Array.prototype.slice.call(stage.querySelectorAll(".review"));
+    var slides = Array.prototype.slice.call(track.querySelectorAll(".review"));
     section.hidden = false;
-    show(0);
+    place(false);
+    if (reviews.length > 1) schedule();
+    window.addEventListener("resize", function () {
+        place(false);
+    });
 
-    if (reduceMotion && reviews.length > 1 && nav) {
-        nav.hidden = false;
+    if (reviews.length > 1 && nav) {
+        if (reduceMotion) nav.hidden = false;
         nav.addEventListener("click", function (event) {
             var button = event.target.closest("[data-review]");
             if (!button) return;
-            show(index + (button.getAttribute("data-review") === "next" ? 1 : -1));
-        });
-    }
-
-    if (!reduceMotion && reviews.length > 1) {
-        section.addEventListener("pointerenter", function () {
-            hovering = true;
-            stop();
-        });
-        section.addEventListener("pointerleave", function () {
-            hovering = false;
-            schedule();
+            step(button.getAttribute("data-review") === "next" ? 1 : -1);
         });
         section.addEventListener("focusin", function () {
             focused = true;
-            stop();
+            window.clearTimeout(timer);
         });
         section.addEventListener("focusout", function (event) {
             if (section.contains(event.relatedTarget)) return;
             focused = false;
             schedule();
         });
-        schedule();
-        window.addEventListener("pagehide", stop);
+        window.addEventListener("pagehide", function () {
+            window.clearTimeout(timer);
+        });
     }
 
-    function show(next) {
-        index = (next + reviews.length) % reviews.length;
-        slides.forEach(function (slide, position) {
-            var current = position === index;
-            slide.classList.toggle("is-current", current);
-            slide.setAttribute("aria-hidden", current ? "false" : "true");
-            slide.querySelectorAll("a").forEach(function (link) {
+    function step(direction) {
+        window.clearTimeout(timer);
+        var last = reviews.length - 1;
+        if (direction < 0 && index === 0) index = last;
+        else if (direction > 0 && index === last) index = reviews.length;
+        else index += direction;
+        place(true);
+    }
+
+    function place(animate) {
+        var width = stage.clientWidth;
+        var slide = !reduceMotion && animate;
+        slides.forEach(function (item) {
+            item.style.width = width + "px";
+        });
+        track.classList.toggle("is-instant", !slide);
+        if (!slide) track.getBoundingClientRect();
+        track.style.transform = "translate3d(" + (-index * width) + "px, 0, 0)";
+        if (!slide) {
+            track.getBoundingClientRect();
+            track.classList.remove("is-instant");
+        }
+        var visible = index === reviews.length ? slides.length - 1 : index;
+        slides.forEach(function (item, position) {
+            var current = position === visible;
+            item.setAttribute("aria-hidden", current ? "false" : "true");
+            item.querySelectorAll("a").forEach(function (link) {
                 if (current) link.removeAttribute("tabindex");
                 else link.tabIndex = -1;
             });
         });
+        if (!slide) {
+            if (animate) schedule();
+            return;
+        }
+        window.clearTimeout(timer);
+        var finished = false;
+        function settle(event) {
+            if (finished) return;
+            if (event && (event.target !== track || event.propertyName !== "transform")) return;
+            finished = true;
+            track.removeEventListener("transitionend", settle);
+            if (index === reviews.length) {
+                index = 0;
+                place(false);
+            }
+            schedule();
+        }
+        track.addEventListener("transitionend", settle);
+        timer = window.setTimeout(settle, 1600);
     }
 
     function schedule() {
-        stop();
-        if (hovering || focused || reduceMotion || reviews.length < 2) return;
-        timer = window.setTimeout(function () {
-            show(index + 1);
-            schedule();
-        }, 3000);
-    }
-
-    function stop() {
         window.clearTimeout(timer);
-        timer = 0;
+        if (focused || reviews.length < 2) return;
+        timer = window.setTimeout(function () {
+            index += 1;
+            place(true);
+        }, HOLD);
     }
 
     function isValid(review) {

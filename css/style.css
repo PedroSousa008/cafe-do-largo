@@ -811,35 +811,26 @@ section {
 }
 
 .reviews-stage {
-    display: grid;
-    align-items: center;
-    width: min(100%, 42rem);
+    overflow: hidden;
+    width: min(100%, 46rem);
     margin: 0 auto;
 }
 
+.reviews-track {
+    display: flex;
+    align-items: center;
+    transition: transform 1.25s cubic-bezier(0.45, 0.05, 0.2, 1);
+}
+
+.reviews-track.is-instant {
+    transition: none;
+}
+
 .review {
-    grid-area: 1 / 1;
-    width: 100%;
+    flex: 0 0 auto;
     margin: 0;
+    padding: 0 1.25rem;
     text-align: center;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(1.1rem);
-    pointer-events: none;
-}
-
-.review.is-current {
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    pointer-events: auto;
-    z-index: 1;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .review {
-        transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-    }
 }
 
 .review-stars {

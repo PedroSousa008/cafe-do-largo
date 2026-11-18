@@ -4,7 +4,7 @@
 
 :root {
     --ivory: #ffffff;
-    --paper: #f4f4f4;
+    --paper: #f5f5f5;
     --brown: #111111;
     --olive: #111111;
     --green: #00ff7f;
@@ -439,8 +439,8 @@ section {
 }
 
 .menu-photo {
-    aspect-ratio: 5 / 3;
-    background: #d6d6d6;
+    aspect-ratio: 3 / 5;
+    background: #f5f5f5;
 }
 
 .menu-photo img {

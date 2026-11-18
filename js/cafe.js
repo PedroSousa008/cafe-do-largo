@@ -57,7 +57,7 @@ window.CAFE = {
     /* Cada secção recebe os pratos em items.
        name é obrigatório.
        price e image são opcionais.
-       Os ingredientes não são mostrados.
+       Os ingredientes não são apresentados.
        image é o caminho da fotografia, por exemplo "images/ementa/francesinha.jpg". */
     menu: [
         { category: "Snacks", items: [] },
@@ -66,7 +66,7 @@ window.CAFE = {
             {
                 name: "Francesinha",
                 price: "€",
-                image: "images/ementa/francesinha.jpg?v=3"
+                image: "images/ementa/francesinha.jpg?v=4"
             }
         ] },
         { category: "Sobremesa", items: [] },

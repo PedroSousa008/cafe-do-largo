@@ -62,9 +62,6 @@
     }
 
     function renderVisit(data) {
-        var root = document.getElementById("visita-conteudo");
-        if (!root) return;
-
         var address = data.address || {};
         var lines = [];
         if (address.street) lines.push(address.street);
@@ -76,65 +73,38 @@
             return row && (row.days || row.time);
         });
 
-        var blocks = [];
+        var hoursRoot = document.getElementById("horario-conteudo");
+        if (hoursRoot) {
+            hoursRoot.innerHTML = hours.map(function (row) {
+                var closed = /encerr/i.test(row.time || "");
+                return "<div" + (closed ? " class='is-closed'" : "") + ">" +
+                    "<span>" + escapeHtml(row.days || "") + "</span>" +
+                    "<span>" + escapeHtml(row.time || "") + "</span>" +
+                "</div>";
+            }).join("");
+        }
 
-        if (lines.length) {
+        var addressLink = document.getElementById("morada-link");
+        if (addressLink && lines.length) {
+            addressLink.innerHTML = lines.map(escapeHtml).join("<br>");
             var maps = mapsLink(data, lines);
-            blocks.push(
-                "<div><dt>Morada</dt><dd>" +
-                    lines.map(escapeHtml).join("<br>") +
-                    (maps ? "<br><a class='text-link' href='" + escapeHtml(maps) + "'>Indicações</a>" : "") +
-                "</dd></div>"
-            );
+            if (maps) {
+                addressLink.href = maps;
+                addressLink.target = "_blank";
+                addressLink.rel = "noopener noreferrer";
+            }
         }
 
-        if (hours.length) {
-            blocks.push(
-                "<div><dt>Horário</dt><dd><div class='hours'>" +
-                    hours.map(function (row) {
-                        var closed = /encerr/i.test(row.time || "");
-                        return "<div" + (closed ? " class='is-closed'" : "") + ">" +
-                            "<span>" + escapeHtml(row.days || "") + "</span>" +
-                            "<span>" + escapeHtml(row.time || "") + "</span>" +
-                        "</div>";
-                    }).join("") +
-                "</div></dd></div>"
-            );
+        var emailLink = document.getElementById("email-link");
+        if (emailLink && data.email) {
+            emailLink.href = "mailto:" + data.email;
+            emailLink.setAttribute("aria-label", "Enviar email para " + data.email);
         }
 
-        if (data.phone) {
-            var tel = String(data.phone).replace(/[^\d+]/g, "");
-            blocks.push(
-                "<div><dt>Telefone</dt><dd><a class='text-link' href='tel:" +
-                    escapeHtml(tel) + "'>" + escapeHtml(data.phone) + "</a></dd></div>"
-            );
+        var facebookLink = document.getElementById("facebook-link");
+        if (facebookLink && isUrl(data.facebook)) {
+            facebookLink.href = data.facebook;
         }
-
-        if (data.email) {
-            blocks.push(
-                "<div><dt>Correio eletrónico</dt><dd><a class='text-link' href='mailto:" +
-                    escapeHtml(data.email) + "'>" + escapeHtml(data.email) + "</a></dd></div>"
-            );
-        }
-
-        if (isUrl(data.instagram)) {
-            blocks.push(
-                "<div><dt>Instagram</dt><dd><a class='text-link' href='" +
-                    escapeHtml(data.instagram) + "'>Instagram</a></dd></div>"
-            );
-        }
-
-        if (isUrl(data.facebook)) {
-            blocks.push(
-                "<div><dt>Facebook</dt><dd><a class='text-link' href='" +
-                    escapeHtml(data.facebook) +
-                    "' target='_blank' rel='noopener noreferrer'>Facebook</a></dd></div>"
-            );
-        }
-
-        if (!blocks.length) return;
-
-        root.innerHTML = "<dl class='visit-list'>" + blocks.join("") + "</dl>";
     }
 
     function renderFooter(data) {
@@ -319,7 +289,7 @@
         if (!window.matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
         if (!("IntersectionObserver" in window)) return;
 
-        var nodes = document.querySelectorAll(".about-copy, .menu .frame, .gallery .frame, .visit .frame");
+        var nodes = document.querySelectorAll(".about-copy, .menu .frame, .visit-hours, .visit-side");
         if (!nodes.length) return;
 
         var observer = new IntersectionObserver(function (entries) {

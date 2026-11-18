@@ -200,7 +200,9 @@ section {
     .nav-toggle,
     .site-nav a,
     .footer-nav a,
-    .text-link {
+    .text-link,
+    .address-link,
+    .icon-link {
         transition: transform 100ms ease-out, color 0.35s var(--spring), text-decoration-color 0.35s var(--spring);
     }
 
@@ -208,7 +210,9 @@ section {
     .nav-toggle:active,
     .site-nav a:active,
     .footer-nav a:active,
-    .text-link:active {
+    .text-link:active,
+    .address-link:active,
+    .icon-link:active {
         transform: scale(0.975);
     }
 }
@@ -226,6 +230,8 @@ section {
 .footer-nav a:focus-visible,
 .text-link:hover,
 .text-link:focus-visible,
+.address-link:hover,
+.address-link:focus-visible,
 .wordmark:hover,
 .wordmark:focus-visible {
     text-decoration-color: var(--green);
@@ -236,7 +242,7 @@ section {
    ======================================== */
 
 .hero {
-    padding-top: 1.25rem;
+    padding-top: 0;
 }
 
 .hero-figure {
@@ -309,7 +315,6 @@ h1 {
 
 .about-copy h2,
 .menu h2,
-.gallery h2,
 .visit h2 {
     margin: 0;
     font-size: clamp(2.5rem, 4.4vw, 3.6rem);
@@ -394,112 +399,74 @@ h1 {
 }
 
 /* ========================================
-   Ambiente
-   ======================================== */
-
-.gallery {
-    padding: 5rem 0 4.5rem;
-}
-
-.gallery h2 {
-    margin-bottom: 1.5rem;
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: 1.45fr 0.9fr;
-    gap: 0.85rem;
-}
-
-.shot {
-    margin: 0;
-    overflow: hidden;
-}
-
-.shot img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.shot-wide {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.shot-wide img {
-    aspect-ratio: 3 / 2;
-    object-position: center 60%;
-}
-
-.shot-tall {
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    position: relative;
-}
-
-.shot-tall img {
-    position: absolute;
-    inset: 0;
-    height: 100%;
-    object-position: 48% 72%;
-}
-
-.shot-low {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.shot-low img {
-    aspect-ratio: 3 / 2;
-    object-position: center;
-}
-
-/* ========================================
    Visitar
    ======================================== */
 
 .visit {
-    padding: 1.5rem 0 5.5rem;
+    padding: 5rem 0 5.5rem;
 }
 
-.visit-list {
-    max-width: 40rem;
-    margin: 1.75rem 0 0;
-}
-
-.visit-list > div {
+.visit-split {
     display: grid;
-    grid-template-columns: 9.5rem minmax(0, 1fr);
-    gap: 1rem 1.5rem;
-    padding: 0.95rem 0;
-    border-top: 1px solid var(--line);
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: stretch;
 }
 
-.visit-list dt {
-    padding-top: 0.28rem;
-    font-size: 0.9375rem;
+.visit-rule {
+    width: 2px;
+    background: var(--green);
+    margin-inline: clamp(1.75rem, 4vw, 4.5rem);
 }
 
-.visit-list dd {
-    margin: 0;
+.visit-side {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.75rem, 5vw, 4.25rem);
+}
+
+.address-link {
+    display: inline-block;
+    margin-top: 1.2rem;
     font-family: var(--serif);
-    font-size: 1.45rem;
+    font-size: clamp(1.4rem, 2vw, 1.75rem);
     font-weight: 500;
-    line-height: 1.3;
+    line-height: 1.35;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
 }
 
-.visit-list .text-link {
-    font-family: var(--sans);
-    font-size: 0.875rem;
-    font-weight: 400;
-    letter-spacing: 0.03em;
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+    margin-top: 1rem;
+}
+
+.icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--brown);
+}
+
+.icon-link svg {
+    width: 1.45rem;
+    height: 1.45rem;
 }
 
 .hours {
     display: grid;
-    gap: 0.35rem;
+    gap: 0.45rem;
+    margin-top: 1.35rem;
+    font-family: var(--serif);
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.3;
 }
 
 .hours > div {
@@ -579,17 +546,6 @@ h1 {
 /* ========================================
    Movimento
    ======================================== */
-
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    .shot img {
-        transition: opacity 0.4s var(--spring), transform 0.4s var(--spring);
-    }
-
-    .shot:hover img {
-        opacity: 0.92;
-        transform: scale(1.015);
-    }
-}
 
 @media (prefers-reduced-motion: no-preference) {
     html {
@@ -703,10 +659,15 @@ h1 {
     .about-grid,
     .menu-groups,
     #ementa-conteudo:has(.menu-group),
-    .gallery-grid,
     .footer-grid,
-    .visit-list > div {
+    .visit-split {
         grid-template-columns: 1fr;
+    }
+
+    .visit-rule {
+        width: auto;
+        height: 2px;
+        margin: 2.25rem 0;
     }
 
     .hero-figure img {
@@ -739,39 +700,12 @@ h1 {
         max-width: 38ch;
     }
 
-    .menu,
-    .gallery {
+    .menu {
         padding: 3.25rem 0;
     }
 
-    .shot-wide,
-    .shot-low,
-    .shot-tall {
-        grid-column: auto;
-        grid-row: auto;
-    }
-
-    .shot-tall {
-        position: static;
-    }
-
-    .shot-wide img,
-    .shot-low img {
-        aspect-ratio: 3 / 2;
-    }
-
-    .shot-tall img {
-        position: static;
-        aspect-ratio: 3 / 4;
-        height: auto;
-    }
-
     .visit {
-        padding-bottom: 3.5rem;
-    }
-
-    .visit-list > div {
-        gap: 0.3rem;
+        padding: 3.25rem 0 3.5rem;
     }
 
     .footer-meta {

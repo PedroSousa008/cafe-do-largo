@@ -20,17 +20,16 @@
 
    Fotografias
    ------------
-   As imagens em images/ são provisórias. Não são deste café.
-   Servem apenas para a composição, até existirem fotografias do espaço.
+   Há duas fotografias. As atuais são provisórias e não são deste café.
    Licença: Unsplash License.
 
-   images/sala.jpg        abertura     https://unsplash.com/photos/a-room-with-a-lot-of-furniture-and-a-big-window-E-gWfNuyXBs
-   images/pastelaria.jpg  o café       https://unsplash.com/photos/brown-and-white-cookies-on-white-tray-cjJkLgaswWg
-   images/chavena.jpg     ambiente     https://unsplash.com/photos/white-ceramic-mug-on-brown-wooden-surface-NxkFLRNg8g0
-   images/janela.jpg      ambiente     https://unsplash.com/photos/sunlight-streams-through-a-window-onto-a-cafe-table-6_Yye5kmEkM
-   images/nata.jpg        ambiente     https://unsplash.com/photos/a-close-up-of-two-pastries-on-a-table-YM-SwHl0yW8
+   images/sala.jpg        primeira foto, de margem a margem
+                          https://unsplash.com/photos/a-room-with-a-lot-of-furniture-and-a-big-window-E-gWfNuyXBs
+   images/pastelaria.jpg  secção O café
+                          https://unsplash.com/photos/brown-and-white-cookies-on-white-tray-cjJkLgaswWg
 
-   Para as substituir, trocar o ficheiro e o texto alternativo em index.html.
+   Para substituir uma fotografia, colocar o ficheiro novo na pasta images/
+   com o mesmo nome. O texto alternativo está no atributo alt, em index.html.
 */
 
 window.CAFE = {

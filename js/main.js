@@ -90,11 +90,15 @@
 
         if (hours.length) {
             blocks.push(
-                "<div><dt>Horário</dt><dd>" +
+                "<div><dt>Horário</dt><dd><div class='hours'>" +
                     hours.map(function (row) {
-                        return escapeHtml([row.days, row.time].filter(Boolean).join(" · "));
-                    }).join("<br>") +
-                "</dd></div>"
+                        var closed = /encerr/i.test(row.time || "");
+                        return "<div" + (closed ? " class='is-closed'" : "") + ">" +
+                            "<span>" + escapeHtml(row.days || "") + "</span>" +
+                            "<span>" + escapeHtml(row.time || "") + "</span>" +
+                        "</div>";
+                    }).join("") +
+                "</div></dd></div>"
             );
         }
 
@@ -120,6 +124,14 @@
             );
         }
 
+        if (isUrl(data.facebook)) {
+            blocks.push(
+                "<div><dt>Facebook</dt><dd><a class='text-link' href='" +
+                    escapeHtml(data.facebook) +
+                    "' target='_blank' rel='noopener noreferrer'>Facebook</a></dd></div>"
+            );
+        }
+
         if (!blocks.length) return;
 
         root.innerHTML = "<dl class='visit-list'>" + blocks.join("") + "</dl>";
@@ -136,15 +148,23 @@
             slot.hidden = false;
         }
 
-        if (isUrl(data.instagram)) {
-            var nav = document.querySelector(".footer-nav");
-            if (nav && !nav.querySelector("[data-instagram]")) {
-                var link = document.createElement("a");
-                link.href = data.instagram;
-                link.textContent = "Instagram";
-                link.setAttribute("data-instagram", "");
-                nav.appendChild(link);
-            }
+        var nav = document.querySelector(".footer-nav");
+        if (nav && isUrl(data.instagram) && !nav.querySelector("[data-instagram]")) {
+            var instagram = document.createElement("a");
+            instagram.href = data.instagram;
+            instagram.textContent = "Instagram";
+            instagram.setAttribute("data-instagram", "");
+            nav.appendChild(instagram);
+        }
+
+        if (nav && isUrl(data.facebook) && !nav.querySelector("[data-facebook]")) {
+            var facebook = document.createElement("a");
+            facebook.href = data.facebook;
+            facebook.textContent = "Facebook";
+            facebook.target = "_blank";
+            facebook.rel = "noopener noreferrer";
+            facebook.setAttribute("data-facebook", "");
+            nav.appendChild(facebook);
         }
     }
 

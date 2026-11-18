@@ -1,5 +1,5 @@
 /* ========================================
-   Café do Largo — dados editáveis
+   Café Gomil — dados editáveis
    ========================================
    Alterar aqui o nome, os textos, a morada, o horário,
    os contactos, a ementa e os preços.
@@ -34,21 +34,30 @@
 */
 
 window.CAFE = {
-    name: "Café do Largo",
-    tagline: "Um lugar para ficar.",
-    about: "Há sítios onde a pausa se torna um hábito. Um café acabado de tirar, uma mesa junto à luz e uma conversa que não tem hora para acabar.",
+    name: "Café Gomil",
+    tagline: "Matosinhos.",
+    about: "Na Rua do Godinho, em Matosinhos.",
 
     address: {
-        street: "",
-        postalCode: "",
-        city: "",
-        country: ""
+        street: "Rua do Godinho, 483",
+        postalCode: "4450-149",
+        city: "Matosinhos",
+        country: "Portugal"
     },
 
-    hours: [],
+    hours: [
+        { days: "segunda-feira", time: "07:30–23:30" },
+        { days: "terça-feira", time: "07:30–23:30" },
+        { days: "quarta-feira", time: "07:30–23:30" },
+        { days: "quinta-feira", time: "07:30–23:30" },
+        { days: "sexta-feira", time: "07:30–23:30" },
+        { days: "sábado", time: "Encerrado" },
+        { days: "domingo", time: "07:30–23:30" }
+    ],
     phone: "",
-    email: "",
+    email: "cafegomil@hotmail.com",
     instagram: "",
+    facebook: "https://www.facebook.com/profile.php?id=100054219442655&sk=photos",
     mapsUrl: "",
 
     menu: []

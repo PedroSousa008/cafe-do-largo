@@ -301,7 +301,8 @@ section {
     font-size: clamp(2.7rem, 7.2vw, 6.4rem);
     line-height: 0.92;
     letter-spacing: 0.06em;
-    text-shadow: 0 1px 16px rgba(0, 0, 0, 0.35);
+    -webkit-text-stroke: 0.045em #111111;
+    paint-order: stroke fill;
 }
 
 .hero-mark p {

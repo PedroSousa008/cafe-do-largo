@@ -60,7 +60,13 @@ window.CAFE = {
        Os ingredientes não são apresentados.
        image é o caminho da fotografia, por exemplo "images/ementa/francesinha.jpg". */
     menu: [
-        { category: "Snacks", items: [] },
+        { category: "Snacks", items: [
+            {
+                name: "Tosta Mista",
+                price: "€",
+                image: "images/ementa/tosta-mista.jpg?v=1"
+            }
+        ] },
         { category: "Entradas", items: [] },
         { category: "Pratos Principais", items: [
             {

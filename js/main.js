@@ -76,8 +76,8 @@
             hoursRoot.innerHTML = hours.map(function (row) {
                 var closed = /encerr/i.test(row.time || "");
                 return "<div" + (closed ? " class='is-closed'" : "") + ">" +
-                    "<span>" + escapeHtml(row.days || "") + "</span>" +
-                    "<span>" + escapeHtml(row.time || "") + "</span>" +
+                    "<span>" + escapeHtml(shortDay(row.days)) + "</span>" +
+                    "<span>" + escapeHtml(hourTime(row.time)) + "</span>" +
                 "</div>";
             }).join("");
         }
@@ -107,6 +107,24 @@
         var pin = document.getElementById("pin-link");
         var directions = directionsLink(data);
         if (pin && directions) pin.href = directions;
+    }
+
+    function shortDay(value) {
+        var labels = {
+            "segunda-feira": "Segunda",
+            "terça-feira": "Terça",
+            "quarta-feira": "Quarta",
+            "quinta-feira": "Quinta",
+            "sexta-feira": "Sexta",
+            "sábado": "Sábado",
+            "domingo": "Domingo"
+        };
+        var key = String(value || "").trim().toLowerCase();
+        return labels[key] || value || "";
+    }
+
+    function hourTime(value) {
+        return String(value || "").replace(/\s*[–—-]\s*/, " — ");
     }
 
     function renderFooter(data) {

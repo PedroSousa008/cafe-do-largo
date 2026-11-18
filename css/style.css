@@ -404,7 +404,11 @@ section {
     list-style: none;
 }
 
-.menu-bar li {
+.menu-bar button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 0.35rem 0;
     font-family: var(--mark);
     font-weight: 800;
     font-size: 0.92rem;
@@ -412,6 +416,11 @@ section {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #6a645e;
+    cursor: pointer;
+}
+
+.menu-bar button.is-selected {
+    color: var(--brown);
 }
 
 .quiet {
@@ -423,28 +432,10 @@ section {
     line-height: 1.2;
 }
 
-.menu-groups,
-#ementa-conteudo:has(.menu-group) {
+.menu-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: clamp(2rem, 5vw, 4.5rem);
-    margin-top: 2.25rem;
-}
-
-.menu-group h3 {
-    margin: 0 0 0.35rem;
-    padding-bottom: 0.55rem;
-    border-bottom: 1px solid var(--line);
-    font-family: var(--sans);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--brown);
-}
-
-.menu-group ul {
-    margin: 0;
+    gap: 2.5rem;
+    margin: 2.75rem 0 0;
     padding: 0;
     list-style: none;
 }
@@ -452,28 +443,38 @@ section {
 .menu-item {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 1rem 1.5rem;
-    align-items: baseline;
-    padding: 0.85rem 0;
-    border-bottom: 1px solid var(--line);
+    gap: 0.45rem 2.5rem;
+    align-items: start;
+    padding: 0;
 }
 
 .menu-name {
     margin: 0;
-    font-size: clamp(1.35rem, 2vw, 1.6rem);
+    font-family: var(--mark);
+    font-weight: 800;
+    font-size: clamp(1.25rem, 1.8vw, 1.55rem);
     line-height: 1.15;
+    letter-spacing: -0.015em;
 }
 
 .menu-note {
-    margin: 0.2rem 0 0;
-    font-size: 0.875rem;
+    margin: 0.45rem 0 0;
+    max-width: 46rem;
+    color: #6a645e;
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 400;
     line-height: 1.45;
 }
 
 .menu-price {
-    font-size: 0.875rem;
+    font-family: var(--mark);
+    font-weight: 800;
+    font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+    line-height: 1.15;
+    letter-spacing: 0.01em;
     font-variant-numeric: tabular-nums;
-    letter-spacing: 0.02em;
+    white-space: nowrap;
 }
 
 /* ========================================
@@ -831,9 +832,13 @@ section {
         gap: 0.85rem 1.15rem;
     }
 
-    .menu-bar li {
+    .menu-bar button {
         font-size: 0.82rem;
         letter-spacing: 0.08em;
+    }
+
+    .menu-list {
+        gap: 1.85rem;
     }
 
     .footer-meta {

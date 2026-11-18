@@ -25,16 +25,42 @@
 
     function renderMenu(data) {
         var root = document.getElementById("ementa-conteudo");
-        if (!root) return;
+        var buttons = document.querySelectorAll(".menu-bar button");
+        if (!root || !buttons.length) return;
 
-        var groups = (data.menu || []).filter(function (group) {
-            return group && group.items && group.items.length;
+        var groups = data.menu || [];
+        var current = buttons[0].getAttribute("data-category");
+
+        buttons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                show(button.getAttribute("data-category"));
+            });
         });
 
-        if (!groups.length) return;
+        show(current);
 
-        root.innerHTML = groups.map(function (group) {
-            var items = group.items.map(function (item) {
+        function show(category) {
+            buttons.forEach(function (button) {
+                var selected = button.getAttribute("data-category") === category;
+                button.classList.toggle("is-selected", selected);
+                button.setAttribute("aria-selected", selected ? "true" : "false");
+            });
+
+            var group = null;
+            groups.forEach(function (item) {
+                if (item && item.category === category) group = item;
+            });
+
+            var items = ((group && group.items) || []).filter(function (item) {
+                return item && item.name;
+            });
+
+            if (!items.length) {
+                root.innerHTML = "<p class='quiet'>A ementa será publicada aqui.</p>";
+                return;
+            }
+
+            root.innerHTML = "<ul class='menu-list'>" + items.map(function (item) {
                 var note = item.description
                     ? "<p class='menu-note'>" + escapeHtml(item.description) + "</p>"
                     : "";
@@ -44,21 +70,14 @@
                 return (
                     "<li class='menu-item'>" +
                         "<div>" +
-                            "<p class='menu-name'>" + escapeHtml(item.name || "") + "</p>" +
+                            "<p class='menu-name'>" + escapeHtml(item.name) + "</p>" +
                             note +
                         "</div>" +
                         price +
                     "</li>"
                 );
-            }).join("");
-
-            return (
-                "<section class='menu-group'>" +
-                    "<h3>" + escapeHtml(group.category || "") + "</h3>" +
-                    "<ul>" + items + "</ul>" +
-                "</section>"
-            );
-        }).join("");
+            }).join("") + "</ul>";
+        }
     }
 
     function renderVisit(data) {

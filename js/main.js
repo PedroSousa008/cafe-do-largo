@@ -289,7 +289,7 @@
         if (!window.matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
         if (!("IntersectionObserver" in window)) return;
 
-        var nodes = document.querySelectorAll(".about-copy, .menu .frame, .visit-hours, .visit-side");
+        var nodes = document.querySelectorAll(".menu .frame, .visit-hours, .visit-side");
         if (!nodes.length) return;
 
         var observer = new IntersectionObserver(function (entries) {

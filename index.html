@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://cafe-do-largo-seven.vercel.app/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="images/sala.jpg">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -21,12 +21,13 @@
     <a class="skip" href="#conteudo">Saltar para o conteúdo</a>
 
     <header class="site-header">
-        <div class="frame header-bar">
-            <a class="wordmark" href="#inicio" data-field="name">Café Gomil</a>
+        <div class="header-bar">
+            <a class="wordmark" href="#inicio">
+                <img src="images/logo.png" width="512" height="512" alt="Café Gomil">
+            </a>
             <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="navegacao">Menu</button>
             <nav id="navegacao" class="site-nav" aria-label="Navegação principal">
                 <a href="#inicio">Início</a>
-                <a href="#cafe">O Café</a>
                 <a href="#ementa">Ementa</a>
                 <a href="#visitar">Visitar</a>
             </nav>
@@ -35,28 +36,13 @@
 
     <main id="conteudo">
         <section id="inicio" class="hero">
-            <!-- Fotografia provisória. Para a substituir, ver js/cafe.js. -->
             <figure class="hero-figure">
-                <img src="images/sala.jpg" width="1800" height="1200" alt="Balcão de um café, com madeira, uma máquina e a porta aberta para a luz da rua." fetchpriority="high">
+                <img src="images/sala.jpg" width="1448" height="1086" alt="Sala do Café Gomil, com mesas de madeira, o balcão e a montra para a rua." fetchpriority="high">
+                <div class="hero-mark">
+                    <h1>CAFÉ GOMIL</h1>
+                    <p>MATOSINHOS</p>
+                </div>
             </figure>
-            <div class="frame">
-                <div class="hero-text">
-                    <h1 data-field="name">Café Gomil</h1>
-                    <p data-field="tagline">Matosinhos.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="cafe" class="about">
-            <div class="frame about-grid">
-                <figure class="about-figure">
-                    <img src="images/pastelaria.jpg" width="1600" height="2400" alt="Pastéis de nata numa vitrina, no momento em que são servidos." loading="lazy" decoding="async">
-                </figure>
-                <div class="about-copy">
-                    <h2>O café</h2>
-                    <p data-field="about">Na Rua do Godinho, em Matosinhos.</p>
-                </div>
-            </div>
         </section>
 
         <section id="ementa" class="menu">
@@ -110,7 +96,6 @@
             <div class="footer-meta">
                 <nav class="footer-nav" aria-label="Rodapé">
                     <a href="#inicio">Início</a>
-                    <a href="#cafe">O Café</a>
                     <a href="#ementa">Ementa</a>
                     <a href="#visitar">Visitar</a>
                 </nav>

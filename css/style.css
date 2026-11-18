@@ -11,8 +11,9 @@
     --line: rgba(17, 17, 17, 0.14);
     --serif: "Cormorant Garamond", "Palatino Linotype", Palatino, Georgia, serif;
     --sans: "DM Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mark: "Montserrat", "Arial Black", "Arial Bold", sans-serif;
     --pad: clamp(1.25rem, 3.2vw, 4rem);
-    --header: 4.25rem;
+    --header: 6.25rem;
     --radius: 0;
     --spring: linear(0 0%, 0.0401 5%, 0.1313 10%, 0.2431 15%, 0.3577 20%, 0.4656 25%, 0.562 30%, 0.6452 35%, 0.7154 40%, 0.7736 45%, 0.821 50%, 0.8594 55%, 0.89 60%, 0.9144 65%, 0.9336 70%, 0.9487 75%, 0.9605 80%, 0.9696 85%, 0.9767 90%, 0.9822 95%, 1 100%);
     --shadow-edge: 0 12px 28px rgba(17, 17, 17, 0.06);
@@ -154,15 +155,23 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
     min-height: var(--header);
     gap: 1.5rem;
+    padding-inline: clamp(1.15rem, 2.2vw, 2.5rem);
 }
 
 .wordmark {
-    display: inline-block;
-    font-size: clamp(1.35rem, 2vw, 1.6rem);
-    line-height: 1;
-    letter-spacing: -0.02em;
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+    text-decoration: none;
+}
+
+.wordmark img {
+    display: block;
+    width: auto;
+    height: 5.35rem;
 }
 
 .site-nav {
@@ -217,13 +226,6 @@ section {
     }
 }
 
-.wordmark {
-    text-decoration-line: underline;
-    text-decoration-color: transparent;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 0.28em;
-}
-
 .site-nav a:hover,
 .site-nav a:focus-visible,
 .footer-nav a:hover,
@@ -231,9 +233,7 @@ section {
 .text-link:hover,
 .text-link:focus-visible,
 .address-link:hover,
-.address-link:focus-visible,
-.wordmark:hover,
-.wordmark:focus-visible {
+.address-link:focus-visible {
     text-decoration-color: var(--green);
 }
 
@@ -246,39 +246,53 @@ section {
 }
 
 .hero-figure {
+    position: relative;
     margin: 0;
 }
 
 .hero-figure img {
     display: block;
     width: 100%;
-    height: min(62vh, 42rem);
+    height: min(78vh, 52rem);
+    max-height: none;
     object-fit: cover;
     object-position: 42% 55%;
 }
 
-.hero-text {
-    display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(11rem, 0.55fr);
-    gap: 1.5rem 2.5rem;
-    align-items: end;
-    padding: 1.35rem 0 0;
+.hero-mark {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+    color: #6a6a6a;
+    pointer-events: none;
 }
 
-h1 {
+.hero-mark h1,
+.hero-mark p {
     margin: 0;
-    font-size: clamp(3.35rem, 7.4vw, 6.15rem);
+    font-family: var(--mark);
+    font-weight: 800;
+    text-transform: uppercase;
+    text-shadow: 0 1px 16px rgba(255, 255, 255, 0.55);
 }
 
-.hero-text p {
-    margin: 0 0 0.7rem;
-    justify-self: end;
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 500;
-    font-size: clamp(1.45rem, 2vw, 1.8rem);
-    line-height: 1.15;
-    text-align: right;
+.hero-mark h1 {
+    font-size: clamp(2.7rem, 7.2vw, 6.4rem);
+    line-height: 0.92;
+    letter-spacing: 0.06em;
+}
+
+.hero-mark p {
+    margin-top: 0.7rem;
+    font-size: clamp(0.95rem, 1.7vw, 1.35rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.34em;
 }
 
 /* ========================================
@@ -619,6 +633,14 @@ h1 {
         display: inline-flex;
     }
 
+    :root {
+        --header: 5rem;
+    }
+
+    .wordmark img {
+        height: 4.15rem;
+    }
+
     .site-nav {
         display: flex;
         position: fixed;
@@ -671,21 +693,16 @@ h1 {
     }
 
     .hero-figure img {
-        height: min(58vh, 28rem);
+        height: min(70vh, 32rem);
     }
 
-    .hero-text {
-        padding-top: 1.15rem;
+    .hero-mark h1 {
+        font-size: clamp(2.15rem, 11vw, 3.3rem);
+        letter-spacing: 0.04em;
     }
 
-    .hero-text p {
-        justify-self: start;
-        margin: 0;
-        text-align: left;
-    }
-
-    h1 {
-        font-size: clamp(3rem, 14vw, 4.25rem);
+    .hero-mark p {
+        letter-spacing: 0.22em;
     }
 
     .about {
@@ -748,7 +765,7 @@ h1 {
         font-size: 2.7rem;
     }
 
-    .wordmark {
-        font-size: 1.2rem;
+    .wordmark img {
+        height: 3.5rem;
     }
 }

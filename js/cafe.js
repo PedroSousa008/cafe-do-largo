@@ -20,16 +20,11 @@
 
    Fotografias
    ------------
-   Há duas fotografias. As atuais são provisórias e não são deste café.
-   Licença: Unsplash License.
-
+   images/logo.png        logótipo no cabeçalho
    images/sala.jpg        primeira foto, de margem a margem
-                          https://unsplash.com/photos/a-room-with-a-lot-of-furniture-and-a-big-window-E-gWfNuyXBs
-   images/pastelaria.jpg  secção O café
-                          https://unsplash.com/photos/brown-and-white-cookies-on-white-tray-cjJkLgaswWg
 
-   Para substituir uma fotografia, colocar o ficheiro novo na pasta images/
-   com o mesmo nome. O texto alternativo está no atributo alt, em index.html.
+   Para substituir a fotografia, colocar o ficheiro novo na pasta images/
+   com o nome sala.jpg. O texto alternativo está no atributo alt, em index.html.
 */
 
 window.CAFE = {

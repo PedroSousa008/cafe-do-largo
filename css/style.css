@@ -719,7 +719,7 @@ section {
     }
 
     .hero-figure img {
-        height: min(70vh, 32rem);
+        height: 17.5rem;
     }
 
     .hero-mark h1 {

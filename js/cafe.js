@@ -66,7 +66,7 @@ window.CAFE = {
             {
                 name: "Francesinha",
                 price: "€",
-                image: "images/ementa/francesinha.jpg?v=4"
+                image: "images/ementa/francesinha.jpg?v=5"
             }
         ] },
         { category: "Sobremesa", items: [] },

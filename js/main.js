@@ -70,9 +70,6 @@
         var price = String(item.price || "").trim()
             ? "<p class='menu-card-price'>" + escapeHtml(item.price) + "</p>"
             : "";
-        var note = String(item.description || "").trim()
-            ? "<p class='menu-card-note'>" + escapeHtml(item.description) + "</p>"
-            : "";
 
         return (
             "<article class='menu-card'>" +
@@ -81,7 +78,6 @@
                     "<h3 class='menu-card-name'>" + escapeHtml(item.name) + "</h3>" +
                     price +
                 "</div>" +
-                note +
             "</article>"
         );
     }

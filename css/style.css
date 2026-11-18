@@ -439,8 +439,8 @@ section {
 }
 
 .menu-photo {
-    aspect-ratio: 4 / 3;
-    background: #f4f4f4;
+    aspect-ratio: 5 / 3;
+    background: #d6d6d6;
 }
 
 .menu-photo img {
@@ -460,16 +460,17 @@ section {
 }
 
 .menu-card-name,
-.menu-card-price,
-.menu-card-note {
+.menu-card-price {
     margin: 0;
 }
 
 .menu-card-name {
-    font-family: var(--serif);
+    min-width: 0;
+    font-family: var(--sans);
     font-weight: 600;
-    font-size: clamp(1.2rem, 1.6vw, 1.45rem);
-    line-height: 1.15;
+    font-size: 0.92rem;
+    line-height: 1.2;
+    letter-spacing: 0.12em;
 }
 
 .menu-card-price {
@@ -477,14 +478,6 @@ section {
     font-size: 0.95rem;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
-}
-
-.menu-card-note {
-    margin-top: 0.4rem;
-    max-width: 36ch;
-    font-family: var(--sans);
-    font-size: 0.875rem;
-    line-height: 1.45;
 }
 
 .quiet {
@@ -921,18 +914,12 @@ section {
     }
 
     .menu-card-name {
-        font-size: 0.78rem;
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
     }
 
     .menu-card-price {
         font-size: 0.72rem;
-    }
-
-    .menu-card-note {
-        margin-top: 0.25rem;
-        max-width: none;
-        font-size: 0.65rem;
-        line-height: 1.3;
     }
 
     .footer-meta {

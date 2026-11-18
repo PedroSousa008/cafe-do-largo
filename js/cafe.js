@@ -13,7 +13,7 @@
      {
        category: "Cafés",
        items: [
-         { name: "Expresso", description: "", price: "" }
+         { name: "Expresso", price: "" }
        ]
      }
    ]
@@ -56,7 +56,8 @@ window.CAFE = {
 
     /* Cada secção recebe os pratos em items.
        name é obrigatório.
-       price, description e image são opcionais.
+       price e image são opcionais.
+       Os ingredientes não são mostrados.
        image é o caminho da fotografia, por exemplo "images/ementa/francesinha.jpg". */
     menu: [
         { category: "Snacks", items: [] },
@@ -65,8 +66,7 @@ window.CAFE = {
             {
                 name: "Francesinha",
                 price: "€",
-                description: "Pão, Salsicha, Linguiça, Carne de Novilho, Ovo Estrelado, Fiambre, Queijo, Molho Francesinha",
-                image: "images/ementa/francesinha.jpg?v=2"
+                image: "images/ementa/francesinha.jpg?v=3"
             }
         ] },
         { category: "Sobremesa", items: [] },

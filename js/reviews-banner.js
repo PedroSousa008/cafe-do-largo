@@ -83,7 +83,6 @@
             review &&
             String(review.message || "").trim() &&
             String(review.author || "").trim() &&
-            String(review.platform || "").trim() &&
             rating >= 1 &&
             rating <= 5 &&
             rating === Math.round(rating)
@@ -103,7 +102,9 @@
     }
 
     function person(className, text, href) {
-        var label = escapeHtml(text);
+        var value = String(text || "").trim();
+        if (!value) return "";
+        var label = escapeHtml(value);
         if (!href) return '<p class="' + className + '">' + label + "</p>";
         return '<a class="' + className + '" href="' + href + '" target="_blank" rel="noopener noreferrer">' + label + "</a>";
     }

@@ -70,6 +70,12 @@ window.CAFE = {
             }
         ] },
         { category: "Sobremesa", items: [] },
-        { category: "Bebidas", items: [] }
+        { category: "Bebidas", items: [
+            {
+                name: "Café",
+                price: "€",
+                image: "images/ementa/cafe.jpg?v=1"
+            }
+        ] }
     ]
 };

@@ -66,7 +66,7 @@ window.CAFE = {
                 name: "Francesinha",
                 price: "€",
                 description: "Pão, Salsicha, Linguiça, Carne de Novilho, Ovo Estrelado, Fiambre, Queijo, Molho Francesinha",
-                image: "images/ementa/francesinha.jpg"
+                image: "images/ementa/francesinha.jpg?v=2"
             }
         ] },
         { category: "Sobremesa", items: [] },

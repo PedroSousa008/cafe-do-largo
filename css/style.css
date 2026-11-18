@@ -371,6 +371,28 @@ section {
     padding: 4.75rem 0 5rem;
 }
 
+.menu h2 {
+    display: grid;
+    justify-items: center;
+    gap: 0.72rem;
+    width: fit-content;
+    margin-inline: auto;
+    font-family: var(--mark);
+    font-weight: 800;
+    font-size: clamp(1.85rem, 2.8vw, 2.35rem);
+    line-height: 1;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.menu h2::before,
+.menu h2::after {
+    content: "";
+    width: 11.5rem;
+    height: 1px;
+    background: var(--brown);
+}
+
 .quiet {
     max-width: 16rem;
     margin: 1.6rem 0 0;

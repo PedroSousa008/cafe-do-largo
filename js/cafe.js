@@ -65,6 +65,11 @@ window.CAFE = {
                 name: "Tosta Mista",
                 price: "€",
                 image: "images/ementa/tosta-mista.jpg?v=1"
+            },
+            {
+                name: "Torrada",
+                price: "€",
+                image: "images/ementa/torrada.jpg?v=1"
             }
         ] },
         { category: "Entradas", items: [] },

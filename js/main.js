@@ -29,30 +29,20 @@
         if (!root || !buttons.length) return;
 
         var groups = data.menu || [];
-        var current = buttons[0].getAttribute("data-category");
-
-        buttons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                show(button.getAttribute("data-category"));
-            });
-        });
-
-        show(current);
 
         function show(category) {
             buttons.forEach(function (button) {
                 var selected = button.getAttribute("data-category") === category;
-                button.classList.toggle("is-selected", selected);
+                button.classList.toggle("is-active", selected);
                 button.setAttribute("aria-selected", selected ? "true" : "false");
+                if (selected) root.setAttribute("aria-labelledby", button.id);
             });
 
-            var group = null;
-            groups.forEach(function (item) {
-                if (item && item.category === category) group = item;
-            });
-
+            var group = groups.filter(function (entry) {
+                return entry && entry.category === category;
+            })[0];
             var items = ((group && group.items) || []).filter(function (item) {
-                return item && item.name;
+                return item && String(item.name || "").trim();
             });
 
             if (!items.length) {
@@ -60,24 +50,47 @@
                 return;
             }
 
-            root.innerHTML = "<ul class='menu-list'>" + items.map(function (item) {
-                var note = item.description
-                    ? "<p class='menu-note'>" + escapeHtml(item.description) + "</p>"
-                    : "";
-                var price = item.price
-                    ? "<span class='menu-price'>" + escapeHtml(item.price) + "</span>"
-                    : "";
-                return (
-                    "<li class='menu-item'>" +
-                        "<div>" +
-                            "<p class='menu-name'>" + escapeHtml(item.name) + "</p>" +
-                            note +
-                        "</div>" +
-                        price +
-                    "</li>"
-                );
-            }).join("") + "</ul>";
+            root.innerHTML = "<div class='menu-cards'>" + items.map(menuCard).join("") + "</div>";
         }
+
+        buttons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                show(button.getAttribute("data-category"));
+            });
+        });
+
+        show(buttons[0].getAttribute("data-category"));
+    }
+
+    function menuCard(item) {
+        var image = safeImage(item.image);
+        var photo = image
+            ? "<img src=\"" + image + "\" alt=\"" + escapeHtml(item.name) + "\">"
+            : "";
+        var price = String(item.price || "").trim()
+            ? "<p class='menu-card-price'>" + escapeHtml(item.price) + "</p>"
+            : "";
+        var note = String(item.description || "").trim()
+            ? "<p class='menu-card-note'>" + escapeHtml(item.description) + "</p>"
+            : "";
+
+        return (
+            "<article class='menu-card'>" +
+                "<div class='menu-photo'>" + photo + "</div>" +
+                "<div class='menu-card-head'>" +
+                    "<h3 class='menu-card-name'>" + escapeHtml(item.name) + "</h3>" +
+                    price +
+                "</div>" +
+                note +
+            "</article>"
+        );
+    }
+
+    function safeImage(src) {
+        var value = String(src || "").trim();
+        if (!value || /[\s"'<>]/.test(value)) return "";
+        if (/^(https?:\/\/|images\/)/i.test(value)) return escapeHtml(value);
+        return "";
     }
 
     function renderVisit(data) {

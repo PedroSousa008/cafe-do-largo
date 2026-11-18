@@ -54,7 +54,10 @@ window.CAFE = {
     facebook: "https://www.facebook.com/profile.php?id=100054219442655&sk=photos",
     mapsUrl: "",
 
-    /* Cada secção lista os pratos. name é o título, description os ingredientes, price o preço. */
+    /* Cada secção recebe os pratos em items.
+       name é obrigatório.
+       price, description e image são opcionais.
+       image é o caminho da fotografia, por exemplo "images/ementa/francesinha.jpg". */
     menu: [
         { category: "Snacks", items: [] },
         { category: "Entradas", items: [] },

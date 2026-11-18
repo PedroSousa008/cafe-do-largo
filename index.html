@@ -54,13 +54,13 @@
             <div class="frame">
                 <h2>Ementa</h2>
                 <ul class="menu-bar" role="tablist" aria-label="Secções da ementa">
-                    <li><button type="button" role="tab" data-category="Snacks" aria-selected="true">Snacks</button></li>
-                    <li><button type="button" role="tab" data-category="Entradas" aria-selected="false">Entradas</button></li>
-                    <li><button type="button" role="tab" data-category="Pratos Principais" aria-selected="false">Pratos Principais</button></li>
-                    <li><button type="button" role="tab" data-category="Sobremesa" aria-selected="false">Sobremesa</button></li>
-                    <li><button type="button" role="tab" data-category="Bebidas" aria-selected="false">Bebidas</button></li>
+                    <li role="presentation"><button type="button" role="tab" id="tab-snacks" data-category="Snacks" aria-controls="ementa-conteudo" aria-selected="true" class="is-active">Snacks</button></li>
+                    <li role="presentation"><button type="button" role="tab" id="tab-entradas" data-category="Entradas" aria-controls="ementa-conteudo" aria-selected="false">Entradas</button></li>
+                    <li role="presentation"><button type="button" role="tab" id="tab-pratos" data-category="Pratos Principais" aria-controls="ementa-conteudo" aria-selected="false">Pratos Principais</button></li>
+                    <li role="presentation"><button type="button" role="tab" id="tab-sobremesa" data-category="Sobremesa" aria-controls="ementa-conteudo" aria-selected="false">Sobremesa</button></li>
+                    <li role="presentation"><button type="button" role="tab" id="tab-bebidas" data-category="Bebidas" aria-controls="ementa-conteudo" aria-selected="false">Bebidas</button></li>
                 </ul>
-                <div id="ementa-conteudo">
+                <div id="ementa-conteudo" role="tabpanel" aria-labelledby="tab-snacks">
                     <p class="quiet">A ementa será publicada aqui.</p>
                 </div>
             </div>
@@ -125,7 +125,7 @@
         </div>
     </footer>
 
-    <script src="js/cafe.js?v=2"></script>
+    <script src="js/cafe.js?v=3"></script>
     <script src="js/reviews.js"></script>
     <script src="js/main.js?v=3"></script>
     <script src="js/reviews-banner.js?v=2"></script>

@@ -20,6 +20,8 @@
     renderVisit(cafe);
     renderFooter(cafe);
     initNav();
+    initHeader();
+    initReveal();
 
     function renderMenu(data) {
         var root = document.getElementById("ementa-conteudo");
@@ -170,37 +172,150 @@
         if (!toggle || !nav) return;
 
         var desktop = window.matchMedia("(min-width: 46rem)");
+        var motionOk = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+        var progress = 0;
+        var velocity = 0;
+        var target = 0;
+        var frame = 0;
+        var last = 0;
+        var running = false;
+        var omega = (2 * Math.PI) / 0.35;
+        var stiffness = omega * omega;
+        var damping = 2 * omega;
 
-        function closeNav(restoreFocus) {
-            nav.classList.remove("is-open");
-            toggle.setAttribute("aria-expanded", "false");
-            toggle.textContent = "Menu";
-            document.body.classList.remove("nav-open");
-            if (restoreFocus) toggle.focus();
+        function apply(value) {
+            if (desktop.matches || !motionOk) {
+                nav.style.transform = "";
+                nav.style.opacity = "";
+                nav.style.visibility = "";
+                nav.style.pointerEvents = "";
+                return;
+            }
+
+            var clamped = Math.max(0, Math.min(1, value));
+            nav.style.transform = "translateY(" + ((1 - clamped) * -12).toFixed(2) + "px)";
+            nav.style.opacity = clamped.toFixed(3);
+            nav.style.visibility = clamped > 0.02 ? "visible" : "hidden";
+            nav.style.pointerEvents = target === 1 || clamped > 0.08 ? "auto" : "none";
         }
 
-        function openNav() {
-            nav.classList.add("is-open");
-            toggle.setAttribute("aria-expanded", "true");
-            toggle.textContent = "Fechar";
-            document.body.classList.add("nav-open");
+        function stop() {
+            if (frame) cancelAnimationFrame(frame);
+            frame = 0;
+            running = false;
+            last = 0;
         }
+
+        function tick(now) {
+            if (!last) last = now;
+            var dt = Math.min(0.032, (now - last) / 1000);
+            last = now;
+            var force = -stiffness * (progress - target) - damping * velocity;
+            velocity += force * dt;
+            progress += velocity * dt;
+            apply(progress);
+
+            if (Math.abs(progress - target) < 0.004 && Math.abs(velocity) < 0.02) {
+                progress = target;
+                velocity = 0;
+                apply(progress);
+                running = false;
+                frame = 0;
+                return;
+            }
+
+            frame = requestAnimationFrame(tick);
+        }
+
+        function settle(next) {
+            target = next;
+            if (!motionOk || desktop.matches) {
+                stop();
+                progress = next;
+                velocity = 0;
+                apply(next);
+                return;
+            }
+
+            if (!running) {
+                last = 0;
+                running = true;
+                frame = requestAnimationFrame(tick);
+            }
+        }
+
+        function setOpen(isOpen, restoreFocus) {
+            nav.classList.toggle("is-open", isOpen);
+            toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+            toggle.textContent = isOpen ? "Fechar" : "Menu";
+            document.body.classList.toggle("nav-open", isOpen && !desktop.matches);
+            nav.setAttribute("aria-hidden", desktop.matches || isOpen ? "false" : "true");
+            settle(isOpen ? 1 : 0);
+            if (!isOpen && restoreFocus) toggle.focus();
+        }
+
+        apply(0);
+        nav.setAttribute("aria-hidden", desktop.matches ? "false" : "true");
 
         toggle.addEventListener("click", function () {
-            if (nav.classList.contains("is-open")) closeNav(false);
-            else openNav();
+            setOpen(!nav.classList.contains("is-open"), false);
         });
 
         nav.addEventListener("click", function (event) {
-            if (event.target.closest("a")) closeNav(false);
+            if (event.target.closest("a")) setOpen(false, false);
         });
 
         document.addEventListener("keydown", function (event) {
-            if (event.key === "Escape" && nav.classList.contains("is-open")) closeNav(true);
+            if (event.key === "Escape" && nav.classList.contains("is-open")) setOpen(false, true);
         });
 
         desktop.addEventListener("change", function (event) {
-            if (event.matches) closeNav(false);
+            if (event.matches) setOpen(false, false);
+            else apply(nav.classList.contains("is-open") ? 1 : 0);
+        });
+    }
+
+    function initHeader() {
+        var header = document.querySelector(".site-header");
+        if (!header) return;
+
+        var ticking = false;
+
+        function update() {
+            ticking = false;
+            header.classList.toggle("is-scrolled", window.scrollY > 8);
+        }
+
+        window.addEventListener("scroll", function () {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(update);
+        }, { passive: true });
+
+        update();
+    }
+
+    function initReveal() {
+        if (!window.matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+        if (!("IntersectionObserver" in window)) return;
+
+        var nodes = document.querySelectorAll(".about-copy, .menu .frame, .gallery .frame, .visit .frame");
+        if (!nodes.length) return;
+
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("is-in");
+                observer.unobserve(entry.target);
+            });
+        }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+
+        nodes.forEach(function (node) {
+            var rect = node.getBoundingClientRect();
+            var visible = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+            node.classList.add("reveal");
+            if (visible) node.classList.add("is-in");
+            else observer.observe(node);
         });
     }
 })();
